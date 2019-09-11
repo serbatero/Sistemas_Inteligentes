@@ -1,4 +1,5 @@
 
+
 import matplotlib.pyplot as plt
 import random
 import heapq
@@ -7,34 +8,6 @@ import sys
 from collections import defaultdict, deque, Counter
 from itertools import combinations
 
-class Problem(object):
-    """The abstract class for a formal problem. A new domain subclasses this,
-    overriding `actions` and `results`, and perhaps other methods.
-    The default heuristic is 0 and the default action cost is 1 for all states.
-    When yiou create an instance of a subclass, specify `initial`, and `goal` states 
-    (or give an `is_goal` method) and perhaps other keyword args for the subclass."""
-
-    def __init__(self, initial=None, goal=None, **kwds): 
-        self.__dict__.update(initial=initial, goal=goal, **kwds) 
-        
-    def actions(self, state):        
-        raise NotImplementedError
-        
-    def result(self, state, action): 
-        raise NotImplementedError
-        
-    def is_goal(self, state):        
-        return state == self.goal
-    
-    def action_cost(self, s, a, s1): 
-        return 1
-    
-    def h(self, node):               
-        return 0
-    
-    def __str__(self):
-        return '{}({!r}, {!r})'.format(
-            type(self).__name__, self.initial, self.goal)
 
 class JarProblem(object):
     """The abstract class for a formal problem. A new domain subclasses this,
@@ -126,7 +99,7 @@ class PriorityQueue:
     def top(self): return self.items[0][1]
 
     def __len__(self): return len(self.items)
-    
+
 class Node:
     "A Node in a search tree."
     def __init__(self, state, parent=None, action=None, path_cost=0):
@@ -299,7 +272,7 @@ def depth_first_recursive_search(problem, node=None):
                 return result
         return failure
 
-
 p1 = JarProblem((0,0),1,(3,5))
-soln = breadth_first_search(p1)
+soln = breadth_first_search(JarProblem((0,0),1,(3,5)))
 path_actions(soln), path_states(soln)
+print(p1)
