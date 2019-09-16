@@ -100,6 +100,7 @@ def best_first_tree_search(problem, f):
     return failure
 
 
+
 def g(n): return n.path_cost
 
 
@@ -167,6 +168,21 @@ def breadth_first_search(problem):
                 frontier.appendleft(child)
     return failure
 
+def breadth_first_search_state_space(problem):    
+    state_space = []
+    node = Node(problem.initial)
+    frontier = FIFOQueue([node])
+    reached = {problem.initial}
+    while frontier:
+        node = frontier.pop()        
+        for child in expand(problem, node):
+            s = child.state
+            state_space.append(s)
+            if not problem.is_goal(s):
+                if s not in reached:
+                  reached.add(s)
+                  frontier.appendleft(child)
+    return state_space
 
 def iterative_deepening_search(problem):
     "Do depth-limited search with increasing depth limits."
@@ -205,6 +221,7 @@ def depth_first_recursive_search(problem, node=None):
             if result:
                 return result
         return failure
+
 class CannibalsProblem(object):   
 
     def __init__(self, initial, goal): 
@@ -315,3 +332,6 @@ print("Secuencia de estados:")
 print(path_states(sol3))
 movimientos = len(path_actions(sol3))
 print ("Número de movimientos = " + str(movimientos))
+
+stateSpace = breadth_first_search_state_space(p3)
+print(stateSpace)
