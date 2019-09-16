@@ -1,5 +1,4 @@
 
-
 import matplotlib.pyplot as plt
 import random
 import heapq
@@ -65,9 +64,9 @@ class JarProblem(object):
           newstate[0] = self.capacity[0]
       return tuple(newstate)
     def is_goal(self,state):
-      return self == state                  
+      return self.goal in state                  
 
-    def action_cost(self, s, a, s1): return 1
+    def action_cost(self, s, a, s1): return 0
     def h(self, node):               return 0
     
     def __str__(self):
@@ -275,4 +274,4 @@ def depth_first_recursive_search(problem, node=None):
 p1 = JarProblem((0,0),1,(3,5))
 soln = breadth_first_search(JarProblem((0,0),1,(3,5)))
 path_actions(soln), path_states(soln)
-print(p1)
+print(path_actions(soln),path_states(soln))
